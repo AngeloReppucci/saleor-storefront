@@ -3,6 +3,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+ARG API_URI=${API_URI_VAR}
+ENV API_URI ${API_URI:-http://localhost:8000/graphql/}
 RUN API_URI=${API_URI} npm run build
 
 FROM nginx:stable
